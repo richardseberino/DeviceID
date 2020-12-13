@@ -1,0 +1,19 @@
+{
+  "name": "rbsfnapi",
+  "version": "1.0.0",
+  "description": "Chamada de API RBSFN em Homologação",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.ibm.com:CipBlockchain/DeviceID.git"
+  },
+  "author": "Erik Andersen (erik.andersen@br.ibm.com)",
+  "license": "ISC",
+  "dependencies": {
+    "request": "2.88.0",
+    "yargs": "13.2.4"
+  }
+}

@@ -1,0 +1,530 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentação da REST-API da CIP.",
+    "version": "1.0.1",
+    "title": "Swagger Device ID",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "172.28.131.14:31060",
+  "basePath": "/v1/device_id",
+  "tags": [
+    {
+      "name": "Dispositivos Restritos",
+      "description": ""
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/dispositivos_restritos": {
+      "put": {
+        "tags": [
+          "Dispositivos Restritos"
+        ],
+        "summary": "Insere uma qualificação",
+        "description": "Adiciona nova qualificação do dispositivo na rede blockchain. ",
+        "operationId": "qualificacao",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Identificador-Org",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Código ISPB utilizado apenas para instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Serial-Number",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "ID do certificado pelas instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Assinatura",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Assinatura digital enviada pelas instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Chave-Publica",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Chave Publica da instituição que assinou o certificado."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Campos necessários para qualificar um dispositivo.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Qualificacao"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Inserido com sucesso",
+            "schema": {
+              "$ref": "#/definitions/QualificacaoRetorno"
+            }
+          },
+          "400": {
+            "description": "Campos obrigatórios não informados",
+            "schema":{
+              "$ref": "#/definitions/ErroCamposQualifica"
+            }
+          },
+          "417": {
+            "description": "Não foram informados todos os cabeçalhos esperados para a requisição",
+            "schema": {
+              "$ref": "#/definitions/ErroHeader" 
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Dispositivos Restritos"
+        ],
+        "summary": "Ultima qualificação do dispositivo",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "consulta",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Identificador-Org",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Código ISPB utilizado apenas para instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Serial-Number",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "ID do certificado pelas instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Assinatura",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Assinatura digital enviada pelas instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Chave-Publica",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Chave Publica da instituição que assinou o certificado."
+          },
+          {
+            "name": "imei",
+            "in": "query",
+            "description": "Imei formato puro (sem Hash)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "msisdn",
+            "in": "query",
+            "description": "Msisdn formato puro (sem Hash)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iccid",
+            "in": "query",
+            "description": "Iccid formato puro (sem Hash)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dispositivo encontrado",
+            "schema": {
+              "$ref": "#/definitions/QualificacaoRetorno"
+            }
+          },
+          "400": {
+            "description": "Campos obrigatórios não informados",
+            "schema":{
+              "$ref": "#/definitions/ErroCampos"
+            }
+          },
+          "404": {
+            "description": "Dispositivo não encontrado",
+            "schema":{
+              "$ref":"#/definitions/NaoEncontrado"
+            }
+          },
+          "417": {
+            "description": "Não foram informados todos os cabeçalhos esperados para a requisição",
+            "schema": {
+              "$ref": "#/definitions/ErroHeader" 
+            }
+          }
+        }
+      }
+    },
+    "/dispositivos_restritos/detalhes": {
+      "get": {
+        "tags": [
+          "Dispositivos Restritos"
+        ],
+        "summary": "Histórico de qualificações",
+        "description": "Busca histórico das qualificações dos dispositivos",
+        "operationId": "historico",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Identificador-Org",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Código ISPB utilizado apenas para instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Serial-Number",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "ID do certificado pelas instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Assinatura",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Assinatura digital enviada pelas instituições que utilizam API Gateway da CIP"
+          },
+          {
+            "name": "X-Chave-Publica",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Chave Publica da instituição que assinou o certificado."
+          },
+          {
+            "name": "imei",
+            "in": "query",
+            "description": "Imei formato puro (sem Hash)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "msisdn",
+            "in": "query",
+            "description": "Msisdn formato puro (sem Hash)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "iccid",
+            "in": "query",
+            "description": "Iccid formato puro (sem Hash)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Histórico do dispositivo encontrado",
+            "schema": {
+              "$ref": "#/definitions/Detalhes"
+            }
+          },
+          "400": {
+            "description": "Campos obrigatórios não informados",
+            "schema":{
+              "$ref": "#/definitions/ErroCampos"
+            }
+          },
+          "404": {
+            "description": "Histórico do dispositivo não encontrado",
+            "schema":{
+              "$ref":"#/definitions/NaoEncontrado"
+            }
+          },
+          "417": {
+            "description": "Não foram informados todos os cabeçalhos esperados para a requisição",
+            "schema": {
+              "$ref": "#/definitions/ErroHeader" 
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Qualificacao": {
+      "type": "object",
+      "required": [
+        "imei",
+        "iccid",
+        "msisdn",
+        "motivo",
+        "ispb",
+        "assinatura",
+        "idCertificado",
+        "chavePublica"
+      ],
+      "properties": {
+        "imei": {
+          "type": "string",
+          "example": "000000000"
+        },
+        "iccid": {
+          "type": "string",
+          "example": "000000000"
+        },
+        "msisdn": {
+          "type": "string",
+          "example": "000000000"
+        },
+        "motivo": {
+          "type": "string",
+          "example": "1"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Dispositivo bloqueado devido roubo (exemplo)"
+        },
+        "numeroReferenciaIF": {
+          "type": "string",
+          "example": "1000000"
+        }
+      }
+    },
+    "QualificacaoRetorno": {
+      "type": "object",
+      "required": [
+        "imei",
+        "iccid",
+        "msisdn",
+        "motivo",
+        "ispb",
+        "assinatura",
+        "idCertificado",
+        "chavePublica",
+        "idDispositivo"
+      ],
+      "properties": {
+        "imei": {
+          "type": "string",
+          "example": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        },
+        "iccid": {
+          "type": "string",
+          "example": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        },
+        "msisdn": {
+          "type": "string",
+          "example": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        },
+        "idDispositivo":{
+          "type": "string",
+          "example": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba9186b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba9186b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        },
+        "motivo": {
+          "type": "string",
+          "example": "1"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Dispositivo bloqueado devido roubo (exemplo)"
+        },
+        "numeroReferenciaIF": {
+          "type": "string",
+          "example": "1000000"
+        },
+        "dataCriacao": {
+          "type": "string",
+          "example": "2019-05-27T13:03:59.316Z"
+        },
+        "dataAtualizacao": {
+          "type": "string",
+          "example": "2019-05-27T13:03:59.316Z"
+        },
+        "assinatura": {
+          "type": "string",
+          "example": "a12b5c3348970"
+        },
+        "ispb": {
+          "type": "string",
+          "example": "a12b5c3348970"
+        },
+        "idCertificado": {
+          "type": "string",
+          "example": "a12b5c3348970"
+        },
+        "chavePublica": {
+          "type": "string",
+          "example": "a12b5c3348970"
+        }
+      }
+    },
+    "Detalhes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "TxId": {
+            "type": "string",
+            "example": "975176ee75807ba739f6e4445451b8b7a447056eb0d344cc8d7beaf9e77133ac"
+          },
+          "dataTransacacao": {
+            "type": "string",
+            "example": "2019-05-27T13:03:59.000Z"
+          },
+          "dado": {
+            "$ref": "#/definitions/QualificacaoRetorno"
+          }
+        }
+      }
+    },
+    "ErroHeader": {
+      "type": "object",
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 417
+        },
+        "mensagem": {
+          "type": "string",
+          "example": "Headers não informados"
+        },
+        "erros": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties":{
+              "codigo":{
+                "type": "number"
+              },
+              "mensgem":{
+                "type": "string"
+              },
+              "campo": {
+                "type": "string"
+              }
+            }
+          },
+          "example": [
+            {
+                "codigo": 417.1,
+                "campo": "X-Identificador-Org",
+                "mensagem": "Não encontrado ID da Organização."
+            }
+          ]
+        }
+      }
+    },
+    "ErroCamposQualifica":{
+      "type": "object",
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 400
+        },
+        "mensagem": {
+          "type": "string",
+          "example": "Campos obrigatórios não informados."
+        },
+        "erros": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties":{
+              "codigo":{
+                "type": "number"
+              },
+              "mensgem":{
+                "type": "string"
+              },
+              "campo": {
+                "type": "string"
+              }
+            }
+          },
+          "example": [
+            {
+                "codigo": 400.1,
+                "campo": "imei",
+                "mensagem": "Imei não imformado"
+            }
+          ]
+        }
+      }
+    },
+    "ErroCampos":{
+      "type": "object",
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 400
+        },
+        "mensagem": {
+          "type": "string",
+          "example": "Requisição mal formada, verifique o corpo do Payload."
+        },
+        "erros": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties":{
+              "codigo":{
+                "type": "number"
+              },
+              "mensgem":{
+                "type": "string"
+              },
+              "campo": {
+                "type": "string"
+              }
+            }
+          },
+          "example": [
+            {
+                "codigo": 400.1,
+                "campo": "imei",
+                "mensagem": "Imei não imformado"
+            }
+          ]
+        }
+      }
+    },
+    "NaoEncontrado":{
+      "type": "object",
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 404
+        },
+        "mensagem": {
+          "type": "string",
+          "example": "Dispositivo não encontrado."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+peer chaincode query -n chaincode -c '{"Args":["consultaDispositivo","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468"]}' -C mychannel
+
+peer chaincode query -n chaincode -c '{"Args":["consultaHistoricoDispositivo","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468"]}' -C mychannel

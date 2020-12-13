@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "9b2f8965-e441-42a1-95fa-bea00ea4701f",
+		"name": "CIP API requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Qualificação",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Identificador-Org",
+						"value": "0800965",
+						"type": "text"
+					},
+					{
+						"key": "X-Serial-Number",
+						"value": "23891313",
+						"type": "text"
+					},
+					{
+						"key": "X-Chave-Publica",
+						"value": "fac241aacbb3312",
+						"type": "text"
+					},
+					{
+						"key": "X-Assinatura",
+						"value": "aaabbbbcccc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dispositivo\": {\n        \"imei\": \"10\",\n        \"iccid\": \"10\",\n        \"msisdn\": \"10\",\n        \"motivo\": \"1\",\n        \"numeroReferenciaIF\": \"xxxxxx\",\n        \"descricao\": \"Teste com header\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/v1/qualificacaoDispositivo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"qualificacaoDispositivo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Atual",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Identificador-Org",
+						"value": "0800965",
+						"type": "text"
+					},
+					{
+						"key": "X-Serial-Number",
+						"value": "23891313",
+						"type": "text"
+					},
+					{
+						"key": "X-Chave-Publica",
+						"value": "fac241aacbb3312",
+						"type": "text"
+					},
+					{
+						"key": "X-Assinatura",
+						"value": "aaabbbbcccc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/v1/qualificacaoDispositivo?imei=10&iccid=10&msisdn=10",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"qualificacaoDispositivo"
+					],
+					"query": [
+						{
+							"key": "imei",
+							"value": "10"
+						},
+						{
+							"key": "iccid",
+							"value": "10"
+						},
+						{
+							"key": "msisdn",
+							"value": "10"
+						},
+						{
+							"key": "X-Identificador-Org",
+							"value": "0800965",
+							"disabled": true
+						},
+						{
+							"key": "X-Serial-Number",
+							"value": "23891313",
+							"disabled": true
+						},
+						{
+							"key": "X-Chave-Publica",
+							"value": "fac241aacbb3312",
+							"disabled": true
+						},
+						{
+							"key": "X-Assinatura",
+							"value": "aaabbbbcccc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Histórico",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Identificador-Org",
+						"value": "0800965",
+						"type": "text"
+					},
+					{
+						"key": "X-Serial-Number",
+						"value": "23891313",
+						"type": "text"
+					},
+					{
+						"key": "X-Chave-Publica",
+						"value": "fac241aacbb3312",
+						"type": "text"
+					},
+					{
+						"key": "X-Assinatura",
+						"value": "aaabbbbcccc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/v1/qualificacaoDispositivo/historico?imei=10&iccid=10&msisdn=10",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"qualificacaoDispositivo",
+						"historico"
+					],
+					"query": [
+						{
+							"key": "imei",
+							"value": "10"
+						},
+						{
+							"key": "iccid",
+							"value": "10"
+						},
+						{
+							"key": "msisdn",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

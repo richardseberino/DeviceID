@@ -1,0 +1,31 @@
+Comandos para fazer invoke e query nos peers e para chamar as rotas da api
+
+
+QUALIFICA:
+peer chaincode invoke -n chaincode -c '{"Args":["qualificaDispositivo","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468", "ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468", "ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468", "1", "AA", "Jailbreak"]}' -C mychannel
+
+curl -X POST http://localhost:3000/v1/qualificacaoDispositivo -H 'Accept: */*' -H 'Cache-Control: no-cache' -H 'Connection: keep-alive' -H 'Content-Type: application/json' -H 'Host: localhost:3000' -H 'Postman-Token: 246b3312-2ffc-483f-a402-9c93cabf4343,98218058-4b89-4e30-88ec-134dd40d2e20' -H 'User-Agent: PostmanRuntime/7.13.0' -H 'X-Assinatura: aaabbbbcccc' -H 'X-Chave-Publica: fac241aacbb3312' -H 'X-Identificador-Org: 0800965' -H 'X-Serial-Number: 23891313' -H 'accept-encoding: gzip, deflate' -H 'cache-control: no-cache' -H 'content-length: 202' -H 'cookie: connect.sid=s%3AsrKr5-NvUrBNuHc0auRuiXgeUG1UUVOH.Vrn9Y3ZuscbUzMhIQO3QRBP0DzhzV3Boe7gZKrNVO48' -b connect.sid=s%3AsrKr5-NvUrBNuHc0auRuiXgeUG1UUVOH.Vrn9Y3ZuscbUzMhIQO3QRBP0DzhzV3Boe7gZKrNVO48 -d '{
+    "dispositivo": {
+        "imei": "10",
+        "iccid": "10",
+        "msisdn": "10",
+        "motivo": "1",
+        "numeroReferenciaIF": "xxxxxx",
+        "descricao": "Teste com header"
+    }
+}'
+
+
+CONSULTADISPOSITIVO:
+peer chaincode query -n chaincode -c '{"Args":["consultaDispositivo","11", "11", "11"]}' -C mychannel
+
+curl -X GET 'http://localhost:3000/v1/qualificacaoDispositivo?imei=10&iccid=10&msisdn=10' -H 'Accept: */*' -H 'Cache-Control: no-cache' -H 'Connection: keep-alive' -H 'Host: localhost:3000' -H 'Postman-Token: d805fae4-69e7-4ac1-8b3c-40705ae9010d,61e796ae-10f0-4a78-a1a5-490bc857fd42' -H 'User-Agent: PostmanRuntime/7.13.0' -H 'X-Assinatura: aaabbbbcccc' -H 'X-Chave-Publica: fac241aacbb3312' -H 'X-Identificador-Org: 0800965' -H 'X-Serial-Number: 23891313' -H 'accept-encoding: gzip, deflate' -H 'cache-control: no-cache' -H 'cookie: connect.sid=s%3AsrKr5-NvUrBNuHc0auRuiXgeUG1UUVOH.Vrn9Y3ZuscbUzMhIQO3QRBP0DzhzV3Boe7gZKrNVO48' -b connect.sid=s%3AsrKr5-NvUrBNuHc0auRuiXgeUG1UUVOH.Vrn9Y3ZuscbUzMhIQO3QRBP0DzhzV3Boe7gZKrNVO48
+
+CONSULTAHISTORICO:
+peer chaincode query -n chaincode -c '{"Args":["consultaHistoricoDispositivo","ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468", "ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468", "ed30d41195761412edf99efc30bf9ed508c9b8a6c13eb2986d4bb9994d5a9468"]}' -C mychannel
+
+curl -X GET 'http://localhost:3000/v1/qualificacaoDispositivo/historico?imei=10&iccid=10&msisdn=10' -H 'Postman-Token: da943525-cdbf-4c57-91d8-738fbd7d7ffe' -H 'X-Assinatura: aaabbbbcccc' -H 'X-Chave-Publica: fac241aacbb3312' -H 'X-Identificador-Org: 0800965' -H 'X-Serial-Number: 23891313' -H 'cache-control: no-cache'
+
+
+
+
