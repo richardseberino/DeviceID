@@ -1,4 +1,4 @@
-var networkService = require('./../backEnd/src/services/network-service')
+var networkService = require('./../backEnd/src/services/network-service-K8S')
 
 start()
 //Criando wallets

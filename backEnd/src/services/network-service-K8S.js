@@ -2,26 +2,23 @@
  * SERVIÇO DE CONEXÃO COM A REDE BLOCKCHAIN EM KUBERNETS
  * Funções: gerenciador de wallet (criador de identidade), registrador de usuário e conexao por gateway da fabric-network
  */
+
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const FabricCAServices = require('fabric-ca-client');
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
-
 //BUSCAR CONNECTION PROFILE PARA REDE LOCAL
 const ccpPath = path.resolve(__dirname, '..', '..', '..', 'gateway', 'connection-K8S.json');
 const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
 var connectionProfile = JSON.parse(ccpJSON);
 // const yaml = require('js-yaml');
 
-
 //criando o file system wallet
 const enderecoDaCarteira = path.join(process.env.K8S_URL_FILESYSTEMWALLET, 'wallet');
 const carteira = new FileSystemWallet(enderecoDaCarteira);
 
-
 preparandoServico();
-
 
 async function preparandoServico(){
     //BUSCANDO O CONNECTION PROFILE NO SWAGGER
@@ -82,14 +79,12 @@ async function criarIdentidade(id, secret){
         //Conectando ao CA da organizacao
         const ca = new FabricCAServices(process.env.K8S_CA_URL);
 
-
         const adminExiste = await carteira.exists(id);
         if (adminExiste) {
-            console.log('Uma identidade já existe')
-            await carteira.delete(id)
-            console.log("identidade antiga deletada. Gerando uma nova identidade...")
+             console.log('Uma identidade já existe ');
+            await carteira.delete(id);
+            console.log("identidade antiga deletada. Gerando uma nova identidade...");
         }
-        
         // Inscreve usuario admin e salva na carteira
         console.log("ENROLL");
         const enrollment = await ca.enroll({ enrollmentID: id, enrollmentSecret: secret });

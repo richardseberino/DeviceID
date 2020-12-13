@@ -7,7 +7,7 @@ const consultaDispositivoService = require('../../services/consultaDispositivo-s
 
 let roteador = express.Router();
 
-roteador.put('/', qualificaDispositivoService.put);
+roteador.post('/', qualificaDispositivoService.put);
 
 roteador.get('/', consultaDispositivoService.get);
 

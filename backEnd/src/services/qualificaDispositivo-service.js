@@ -2,7 +2,7 @@
 
 const controladorAPI = require("./../controllers/api-controler")
 const httpStatus = require("http-status-codes")
-
+console.log("Qualifica Dispositivo Service");
 /**
  *
  * @param {Object} req

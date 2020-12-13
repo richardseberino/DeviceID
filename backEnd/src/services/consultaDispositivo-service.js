@@ -3,6 +3,7 @@
 const controladorAPI = require("./../controllers/api-controler")
 const httpStatus = require("http-status-codes")
 
+console.log("COnsulta!!!!!");
 /**
  *
  * @param {Object} req

@@ -1,6 +1,6 @@
 'use strict';
 // @ts-check
-
+console.log("Start backend");
 
 require('dotenv').config()
 require('../helper/readConfig')
@@ -37,8 +37,8 @@ require('../helper/readConfig')
             cert
           }, app);
         
-        // server.listen(port);
-        serverHttps.listen(port);
+         server.listen(port);
+        //serverHttps.listen(port);
         server.on('error', (error) => {
             if (error.syscall !== 'listen') {
                 throw error;

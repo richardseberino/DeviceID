@@ -11,6 +11,7 @@ let nomeDaCarteira = "admin"
  * @param {JSON} dispositivo 
  */
 function qualificaDispositivo(dispositivo) {
+    console.log("Vai registrar um novo device");
     return new Promise(async (resolve, reject) => {
         try {
             var resposta
@@ -46,6 +47,7 @@ function qualificaDispositivo(dispositivo) {
 function consultaDispositivo(imei, iccid, msisdn, authObject) {
     return new Promise(async (resolve, reject) => {
 
+        console.log("Incio da consulta!");
         try {
 
             let resposta
@@ -79,6 +81,7 @@ function consultaHistoricoDispositivo(imei, iccid, msisdn, authObject) {
     return new Promise(async (resolve, reject) => {
         try {
 
+            console.log("Inicio da consulta por historico");
             let resposta
             let dispositivo
             if (process.env.TEST == "true") {
