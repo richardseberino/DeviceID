@@ -37,8 +37,8 @@ require('../helper/readConfig')
             cert
           }, app);
         
-         server.listen(port);
-        //serverHttps.listen(port);
+        // server.listen(port);
+        serverHttps.listen(port);
         server.on('error', (error) => {
             if (error.syscall !== 'listen') {
                 throw error;
