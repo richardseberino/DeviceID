@@ -13,4 +13,4 @@ RUN apk add --no-cache --virtual .gyp \
 COPY ./backEnd /backEnd
 COPY gateway ./gateway
 EXPOSE 3000
-CMD cd /backEnd && npm start
+CMD cd /backEnd && rm .env && source preparaAmbiente.sh && npm start
